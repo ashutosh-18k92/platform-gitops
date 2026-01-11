@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
-    targetRevision: HEAD
+    targetRevision: main
     path: argocd/apps
   destination:
     server: https://kubernetes.default.svc
