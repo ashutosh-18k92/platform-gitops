@@ -14,7 +14,7 @@ spec:
     targetRevision: main
     path: config
     directory:
-      include: '{namespace,configmap}.yaml'
+      include: {namespace,configmap}.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
