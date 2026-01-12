@@ -10,9 +10,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/ashutosh-18k92/paper-service.git
+    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: main
-    path: k8s
+    path: k8s/paper-service
     directory:
       include: deployment.yaml
   destination:
