@@ -14,7 +14,7 @@ spec:
     targetRevision: main
     path: infrastructure/envoy-gateway
     directory:
-      include: '{gateway,httproute}.yaml'
+      include: [gateway.yaml,httproute.yaml]
   destination:
     server: https://kubernetes.default.svc
     namespace: microservices
