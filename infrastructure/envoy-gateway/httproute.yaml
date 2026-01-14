@@ -1,0 +1,26 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: aggregator-route
+  namespace: microservices
+spec:
+  parentRefs:
+  - name: microservices-gateway
+    namespace: envoy-gateway-system
+  hostnames:
+  - "api.local"
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/
+    backendRefs:
+    - name: aggregator-service
+      port: 3000
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /health
+    backendRefs:
+    - name: aggregator-service
+      port: 3000
