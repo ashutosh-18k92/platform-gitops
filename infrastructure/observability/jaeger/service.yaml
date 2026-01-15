@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-query
+  namespace: observability
+  labels:
+    app: jaeger
+spec:
+  type: ClusterIP
+  ports:
+  - port: 16686
+    targetPort: 16686
+    name: query
+  selector:
+    app: jaeger
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-collector
+  namespace: observability
+  labels:
+    app: jaeger
+spec:
+  type: ClusterIP
+  ports:
+  - port: 14268
+    targetPort: 14268
+    name: http
+  - port: 14250
+    targetPort: 14250
+    name: grpc
+  - port: 9411
+    targetPort: 9411
+    name: zipkin
+  - port: 4317
+    targetPort: 4317
+    name: otlp-grpc
+  - port: 4318
+    targetPort: 4318
+    name: otlp-http
+  selector:
+    app: jaeger
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaeger-agent
+  namespace: observability
+  labels:
+    app: jaeger
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+  - port: 5775
+    protocol: UDP
+    targetPort: 5775
+    name: zk-compact-trft
+  - port: 6831
+    protocol: UDP
+    targetPort: 6831
+    name: jg-compact-trft
+  - port: 6832
+    protocol: UDP
+    targetPort: 6832
+    name: jg-binary-trft
+  - port: 5778
+    targetPort: 5778
+    name: config-rest
+  selector:
+    app: jaeger
