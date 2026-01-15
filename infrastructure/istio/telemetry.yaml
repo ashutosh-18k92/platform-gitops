@@ -1,0 +1,13 @@
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: microservices-telemetry
+  namespace: microservices
+spec:
+  tracing:
+  - providers:
+    - name: jaeger
+    randomSamplingPercentage: 100.0  # Sample all requests (for demo)
+  metrics:
+  - providers:
+    - name: prometheus
