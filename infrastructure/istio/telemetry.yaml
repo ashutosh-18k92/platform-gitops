@@ -3,11 +3,13 @@ kind: Telemetry
 metadata:
   name: microservices-telemetry
   namespace: microservices
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   tracing:
   - providers:
     - name: jaeger
-    randomSamplingPercentage: 100.0  # Sample all requests (for demo)
+    randomSamplingPercentage: 100.0
   metrics:
   - providers:
     - name: prometheus
