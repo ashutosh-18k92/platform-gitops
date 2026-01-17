@@ -4,7 +4,7 @@ metadata:
   name: default-mtls
   namespace: super-fortnight
 spec:
-  host: "*.super-fortnight"
+  host: "*"
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
