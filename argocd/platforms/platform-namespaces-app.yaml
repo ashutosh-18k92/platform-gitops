@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: platforms/namespaces
+    path: platform/namespaces
   destination:
     server: https://kubernetes.default.svc
     namespace: default
