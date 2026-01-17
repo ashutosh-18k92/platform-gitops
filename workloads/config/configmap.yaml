@@ -6,6 +6,8 @@ metadata:
   namespace: super-fortnight
   labels:
     app: "super-fortnight-config"
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 data:
   ROCK_SERVICE_URL: "http://rock-service:3001"
   PAPER_SERVICE_URL: "http://paper-service:3002"
