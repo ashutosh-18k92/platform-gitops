@@ -15,7 +15,7 @@ spec:
     path: workloads/config
   destination:
     server: https://kubernetes.default.svc
-    namespace: super-fortnight
+    namespace: default
   syncPolicy:
     automated:
       prune: true

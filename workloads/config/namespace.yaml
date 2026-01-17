@@ -6,3 +6,5 @@ metadata:
     name: "super-fortnight-microservices"
     environment: development
     istio-injection: enabled
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"

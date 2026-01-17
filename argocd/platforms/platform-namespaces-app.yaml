@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: scissor-service
+  name: platform-namespaces
   namespace: argocd
   labels:
-    team: team-scissor-service
+    team: platform
   annotations:
-    argocd.argoproj.io/sync-wave: "10"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: workloads/scissor-service
+    path: platforms/namespaces
   destination:
     server: https://kubernetes.default.svc
-    namespace: super-fortnight
+    namespace: default
   syncPolicy:
     automated:
       prune: true
