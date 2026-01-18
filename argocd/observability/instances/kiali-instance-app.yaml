@@ -5,7 +5,7 @@ spec:
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: platform/observability/kiali
+    path: platform/kiali
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
