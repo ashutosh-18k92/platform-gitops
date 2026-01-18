@@ -6,5 +6,4 @@ metadata:
 spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorSelector: {}
-  serviceMonitorNamespaceSelector:
-    any: true
+  serviceMonitorNamespaceSelector: {}
