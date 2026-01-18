@@ -9,13 +9,19 @@ spec:
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    chart: kube-prometheus-stack
-    targetRevision: 58.2.0
+    chart: prometheus-community
+    targetRevision: 28.5.2
     helm:
       values: |
         grafana:
           enabled: false
         alertmanager:
+          enabled: false
+        kube-state-metrics:
+          enabled: false
+        prometheus-node-exporter:
+          enabled: false
+        prometheus-pushgateway:
           enabled: false
   destination:
     server: https://kubernetes.default.svc
@@ -24,4 +30,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-
