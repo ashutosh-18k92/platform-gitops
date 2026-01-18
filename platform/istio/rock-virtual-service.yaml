@@ -5,7 +5,7 @@ metadata:
   namespace: super-fortnight
 spec:
   hosts:
-    - "api.local"
+    - "rock.api.local"
     - "rock-service"
   gateways:
     - "super-fortnight/super-fortnight-gateway"
@@ -13,24 +13,24 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /rock/api/
+            prefix: /rock
       rewrite:
-        uri: api
+        uri: /
       route:
         - destination:
             host: "rock-service.super-fortnight.svc.cluster.local"
             port:
               number: 3001
-    - match:
-        - uri:
-            prefix: /rock/health/
-      rewrite:
-        uri: health
-      route:
-        - destination:
-            host: "rock-service.super-fortnight.svc.cluster.local"
-            port:
-              number: 3001
+      # - match:
+      #     - uri:
+      #         prefix: /rock/health
+      #   rewrite:
+      #     uri: health
+      #   route:
+      #     - destination:
+      #         host: "rock-service.super-fortnight.svc.cluster.local"
+      #         port:
+      #           number: 3001
       retries:
         attempts: 3
         perTryTimeout: 2s
