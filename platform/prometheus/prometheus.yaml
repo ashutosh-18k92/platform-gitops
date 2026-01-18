@@ -1,0 +1,10 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: main
+  namespace: observability
+spec:
+  serviceAccountName: prometheus-k8s
+  serviceMonitorSelector: {}
+  podMonitorSelector: {}
+
