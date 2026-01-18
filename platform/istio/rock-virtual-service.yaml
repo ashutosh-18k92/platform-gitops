@@ -13,7 +13,9 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /api
+        prefix: /rock/api
+      rewrite:
+        uri: /api
     route:
     - destination:
         host: "rock-service.super-fortnight.svc.cluster.local"
@@ -26,7 +28,9 @@ spec:
     timeout: 10s
   - match:
     - uri:
-        prefix: /health
+        prefix: /rock/health
+      rewrite:
+        uri: /health
     route:
     - destination:
         host: "rock-service.super-fortnight.svc.cluster.local"
