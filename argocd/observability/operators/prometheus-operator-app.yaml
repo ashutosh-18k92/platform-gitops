@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         crds:
-          enabled: true
+          enabled: false
         prometheusOperator:
           enabled: true
         prometheus:
@@ -30,3 +30,4 @@ spec:
       selfHeal: true
   syncOptions:
     - ServerSideApply=true
+    - SkipDryRunOnMissingResource=true
