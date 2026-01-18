@@ -21,6 +21,8 @@ spec:
           enabled: false
         alertmanager:
           enabled: false
+        nodeExporter:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
@@ -30,4 +32,3 @@ spec:
       selfHeal: true
   syncOptions:
     - ServerSideApply=true
-    - SkipDryRunOnMissingResource=true
