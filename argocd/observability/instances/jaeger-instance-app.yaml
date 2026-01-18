@@ -1,15 +1,35 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
 metadata:
-  name: jaeger-instance
+  name: jaeger
+  namespace: observability
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
-    targetRevision: HEAD
-    path: platform/jaeger
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: observability
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  strategy: allInOne # Use 'production' for production with separate components
+  allInOne:
+    image: jaegertracing/all-in-one:1.52
+    options:
+      log-level: info
+      query:
+        base-path: /jaeger
+    resources:
+      requests:
+        cpu: 200m
+        memory: 256Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+  storage:
+    type: memory # Use cassandra or elasticsearch for production
+    options:
+      memory:
+        max-traces: 100000
+  ingress:
+    enabled: false # Set to true if you want external access
+  annotations:
+    sidecar.istio.io/inject: "false" # Don't inject sidecar into Jaeger
+  ui:
+    options:
+      dependencies:
+        menuEnabled: true
+      tracking:
+        gaID: "" # Google Analytics ID if needed

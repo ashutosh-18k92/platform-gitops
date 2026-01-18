@@ -3,14 +3,28 @@ kind: Application
 metadata:
   name: jaeger-operator
   namespace: argocd
-  labels:
-    platform: observability
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://jaegertracing.github.io/helm-charts
-    chart: jaegertracing
-    targetRevision: 4.3.4
+    chart: jaeger-operator
+    targetRevision: 2.51.0
+    helm:
+      releaseName: jaeger-operator
+      values: |
+        jaeger:
+          create: false  # We'll create the Jaeger instance separately
+        rbac:
+          create: true
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: observability

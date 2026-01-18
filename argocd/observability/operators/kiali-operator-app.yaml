@@ -3,14 +3,26 @@ kind: Application
 metadata:
   name: kiali-operator
   namespace: argocd
-  labels:
-    platform: observability
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: https://kiali.org/helm-charts
-    chart: kiali
-    targetRevision: 2.20.0
+    chart: kiali-operator
+    targetRevision: 1.79.0
+    helm:
+      releaseName: kiali-operator
+      values: |
+        cr:
+          create: false  # We'll create the Kiali CR separately
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
