@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: argocd/platforms/observability/instances
+    path: argocd/observability/instances
     directory:
       recurse: true
   destination:
