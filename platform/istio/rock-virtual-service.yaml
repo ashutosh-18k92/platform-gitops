@@ -5,34 +5,34 @@ metadata:
   namespace: super-fortnight
 spec:
   hosts:
-  - "api.local"
-  - "rock-service"
+    - "api.local"
+    - "rock-service"
   gateways:
-  - "super-fortnight/super-fortnight-gateway"
+    - "super-fortnight/super-fortnight-gateway"
   #- mesh  # Also apply to internal mesh traffic
   http:
-  - match:
-    - uri:
-        prefix: /rock/api/
-      rewrite:
-        uri: /api
-    route:
-    - destination:
-        host: "rock-service.super-fortnight.svc.cluster.local"
-        port:
-          number: 3001
-    retries:
-      attempts: 3
-      perTryTimeout: 2s
-      retryOn: 5xx,reset,connect-failure,refused-stream
-    timeout: 10s
-  - match:
-    - uri:
-        prefix: /rock/health/
-      rewrite:
-        uri: /health
-    route:
-    - destination:
-        host: "rock-service.super-fortnight.svc.cluster.local"
-        port:
-          number: 3001
+    - match:
+        - rewrite:
+            uri: /api
+          uri:
+            prefix: /rock/api/
+      route:
+        - destination:
+            host: "rock-service.super-fortnight.svc.cluster.local"
+            port:
+              number: 3001
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx,reset,connect-failure,refused-stream
+      timeout: 10s
+    - match:
+        - rewrite:
+            uri: /health
+          uri:
+            prefix: /rock/health/
+      route:
+        - destination:
+            host: "rock-service.super-fortnight.svc.cluster.local"
+            port:
+              number: 3001
