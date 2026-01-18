@@ -1,51 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring
+  name: prometheus-operator
   namespace: argocd
 spec:
-  # [Lines 1-12 inferred based on standard ArgoCD structure]
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-operator
+    targetRevision: 9.3.2
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: observability
   syncPolicy:
     automated:
-      allowEmpty: false #
-    syncOptions: #
-      - Validate=false
-      - CreateNamespace=true
-      - PrunePropagationPolicy=foreground
-      - PruneLast=true
-      - RespectIgnoreDifferences=true
-      - Replace=false
-      - ApplyOutOfSyncOnly=true
-      - ServerSideApply=true
-  project: default #
-  sources: #
-    - chart: kube-prometheus-stack #
-      repoURL: https://prometheus-community.github.io/helm-charts #
-      targetRevision: 56.* #
-      helm:
-        releaseName: monitoring #
-        passCredentials: false #
-        parameters: #
-          - name: "windowsMonitoring.enabled"
-            value: "false"
-          - name: "grafana.ingress.enabled"
-            value: "true"
-        valueFiles:
-          - $values/configs/monitoring/values/prometheus.yaml #
-          - $values/configs/monitoring/values/grafana.yaml #
-    - repoURL: https://github.com/codemauvn/gitops.git #
-      targetRevision: HEAD
-      path: configs/monitoring
-      ref: values #
-    - repoURL: https://github.com/dotdc/grafana-dashboards-kubernetes #
-      targetRevision: HEAD
-      path: ./
-  destination: #
-    server: "https://kubernetes.default.svc"
-    namespace: monitoring
-  revisionHistoryLimit: 5 #
-  ignoreDifferences: #
-    - jsonPointers:
-        - /spec/volumeName
-        - /spec/storageClassName
-      kind: PersistentVolumeClaim
+      prune: true
+      selfHeal: true
+  syncOptions:
+    - ServerSideApply=true
