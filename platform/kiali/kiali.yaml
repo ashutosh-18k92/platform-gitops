@@ -1,0 +1,14 @@
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  namespace: observability
+spec:
+  istio_namespace: istio-system
+  external_services:
+    prometheus:
+      url: http://prometheus-operated.observability:9090
+    tracing:
+      enabled: true
+      in_cluster_url: http://tracing-query.observability:16686
+
