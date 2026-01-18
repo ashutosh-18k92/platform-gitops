@@ -18,6 +18,9 @@ kind: ConfigMap
 metadata:
   name: istio
   namespace: istio-system
+annotations:
+  argocd.argoproj.io/sync-options: "1"
+
 data:
   mesh: |-
     defaultConfig:

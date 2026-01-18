@@ -1,18 +1,9 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
 metadata:
-  name: prometheus-instance
-  namespace: argocd
+  name: main
+  namespace: observability
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
-    targetRevision: HEAD
-    path: platform/prometheus
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: observability
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  replicas: 1
+  serviceAccountName: prometheus-k8s
+  serviceMonitorSelector: {}
