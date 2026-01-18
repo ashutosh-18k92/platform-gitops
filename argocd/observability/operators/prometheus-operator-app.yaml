@@ -16,7 +16,9 @@ spec:
         prometheusOperator:
           enabled: true
         prometheus:
-          enabled: false
+          enabled: true
+        prometheus:
+          prometheusSpec:{}
         grafana:
           enabled: false
         alertmanager:
