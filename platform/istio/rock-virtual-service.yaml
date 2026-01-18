@@ -12,10 +12,20 @@ spec:
   #- mesh  # Also apply to internal mesh traffic
   http:
     - match:
-        - rewrite:
-            uri: /api
-          uri:
+        - uri:
             prefix: /rock/api/
+      rewrite:
+        uri: /api
+      route:
+        - destination:
+            host: "rock-service.super-fortnight.svc.cluster.local"
+            port:
+              number: 3001
+    - match:
+        - uri:
+            prefix: /rock/health/
+      rewrite:
+        uri: /health
       route:
         - destination:
             host: "rock-service.super-fortnight.svc.cluster.local"
@@ -26,13 +36,3 @@ spec:
         perTryTimeout: 2s
         retryOn: 5xx,reset,connect-failure,refused-stream
       timeout: 10s
-    - match:
-        - rewrite:
-            uri: /health
-          uri:
-            prefix: /rock/health/
-      route:
-        - destination:
-            host: "rock-service.super-fortnight.svc.cluster.local"
-            port:
-              number: 3001
