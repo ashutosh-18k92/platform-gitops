@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/super-fortnight-prometheus.git
-    chart: prometheus-28.5.2/prometheus
+    path: prometheus-28.5.2/prometheus
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
