@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rock-service
+  name: platform-config
   namespace: argocd
   labels:
-    team: team-rock-service
+    team: platform
   annotations:
-    argocd.argoproj.io/sync-wave: 100
+    argocd.argoproj.io/sync-wave: 0
 spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: workloads/rock-service
+    path: platform/namespaces
   destination:
     server: https://kubernetes.default.svc
-    namespace: super-fortnight
+    namespace: default
   syncPolicy:
     automated:
       prune: true
