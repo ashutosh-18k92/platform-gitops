@@ -19,6 +19,11 @@ spec:
             host: "rock-service.super-fortnight.svc.cluster.local"
             port:
               number: 3001
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx,reset,connect-failure,refused-stream
+      timeout: 10s
     - match:
         - uri:
             prefix: /health
@@ -27,8 +32,8 @@ spec:
             host: "rock-service.super-fortnight.svc.cluster.local"
             port:
               number: 3001
-  retries:
-    attempts: 3
-    perTryTimeout: 2s
-    retryOn: 5xx,reset,connect-failure,refused-stream
-  timeout: 10s
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: 5xx,reset,connect-failure,refused-stream
+      timeout: 10s
