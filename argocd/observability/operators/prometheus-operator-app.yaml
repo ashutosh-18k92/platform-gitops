@@ -1,17 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prometheus-operator
+  name: prometheus
   namespace: argocd
 spec:
   project: default
+
   source:
     repoURL: https://github.com/ashutosh-18k92/super-fortnight-prometheus.git
-    path: prometheus-28.5.2/prometheus
     targetRevision: HEAD
+    path: prometheus-28.5.2/prometheus
+    helm:
+      valueFiles:
+        - values.yaml
+
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
+
   syncPolicy:
     automated:
       prune: true
