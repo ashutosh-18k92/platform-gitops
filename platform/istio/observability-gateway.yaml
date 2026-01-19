@@ -1,8 +1,8 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: "super-fortnight-gateway"
-  namespace: "super-fortnight"
+  name: observability-gateway
+  namespace: istio-system
 spec:
   selector:
     istio: ingressgateway
@@ -12,4 +12,6 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - "*.api.local"
+        - grafana.super-fortnight.com
+        - kiali.super-fortnight.com
+        - prometheus.super-fortnight.com
