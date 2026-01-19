@@ -1,12 +1,11 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDatasource
 metadata:
-  name: prometheus
+  name: prometheus-datasource
   namespace: observability
 spec:
   datasource:
     type: prometheus
-    url: http://prometheus-operated.observability:9090
+    url: http://prometheus-operator-server.observability.svc.cluster.local
     access: proxy
     isDefault: true
-
