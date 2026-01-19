@@ -1,14 +1,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-instance
+  name: grafana
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
 spec:
   project: default
   source:
-    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
-    targetRevision: HEAD
-    path: platform/grafana
+    repoURL: https://grafana.github.io/helm-charts
+    chart: grafana
+    targetRevision: 7.3.9
+    helm:
+      values: |
+        adminUser: admin
+        adminPassword: admin
+
+        service:
+          type: ClusterIP
+          port: 3000
+
+        grafana.ini:
+          auth.anonymous:
+            enabled: true
+            org_role: Viewer
+
+        persistence:
+          enabled: false
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
