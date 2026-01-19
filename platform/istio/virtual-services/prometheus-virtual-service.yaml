@@ -5,7 +5,7 @@ metadata:
   namespace: observability
 spec:
   hosts:
-    - prometheus.example.com
+    - prometheus.super-fortnight.com
   gateways:
     - istio-system/observability-gateway
   http:
