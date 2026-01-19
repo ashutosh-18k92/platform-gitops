@@ -9,42 +9,6 @@ spec:
     repoURL: https://github.com/ashutosh-18k92/super-fortnight-prometheus.git
     path: prometheus-28.5.2/prometheus
     targetRevision: HEAD
-    helm:
-      values: |
-        server:
-          enabled: true
-
-          service:
-            enabled: true
-            type: ClusterIP
-            port: 80
-
-          verticalAutoscaler:
-            enabled: false
-
-          persistentVolume:
-            enabled: false
-
-          retention: 15d
-
-          extraScrapeConfigs:
-            - job_name: istio-envoy
-              kubernetes_sd_configs:
-                - role: pod
-
-              relabel_configs:
-                - source_labels: [__meta_kubernetes_pod_container_name]
-                  action: keep
-                  regex: istio-proxy
-
-                - source_labels: [__address__]
-                  action: replace
-                  regex: (.+):.*
-                  replacement: $1:15090
-
-                - target_label: __metrics_path__
-                  replacement: /stats/prometheus
-
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
