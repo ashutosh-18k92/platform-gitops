@@ -5,10 +5,15 @@ metadata:
   namespace: observability
 spec:
   istio_namespace: istio-system
+
+  auth:
+    strategy: anonymous
+
+  deployment:
+    accessible_namespaces:
+      - "**"
+
   external_services:
     prometheus:
-      url: http://prometheus-operated.observability:9090
-    tracing:
-      enabled: true
-      in_cluster_url: http://tracing-query.observability:16686
-
+      # IMPORTANT: this must point to your Helm Prometheus service
+      url: http://prometheus-operator-server.observability.svc.cluster.local

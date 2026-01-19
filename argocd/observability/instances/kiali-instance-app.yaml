@@ -1,19 +1,18 @@
-apiVersion: kiali.io/v1alpha1
-kind: Kiali
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: kiali
-  namespace: observability
+  name: kiali-instance
+  namespace: argocd
 spec:
-  istio_namespace: istio-system
-
-  auth:
-    strategy: anonymous
-
-  deployment:
-    accessible_namespaces:
-      - "**"
-
-  external_services:
-    prometheus:
-      # IMPORTANT: this must point to your Helm Prometheus service
-      url: http://prometheus-operator-server.observability.svc.cluster.local
+  project: default
+  source:
+    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
+    targetRevision: HEAD
+    path: platform/kiali
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: observability
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
