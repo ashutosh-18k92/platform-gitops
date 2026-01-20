@@ -11,6 +11,6 @@ spec:
   http:
     - route:
         - destination:
-            host: prometheus-operator-server.observability.svc.cluster.local
+            host: prometheus-server.observability.svc.cluster.local
             port:
               number: 80
