@@ -4,13 +4,13 @@ metadata:
   name: istio-resources
   namespace: argocd
   labels:
-    team: platform
+    team: infrastructure-team
 spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: platform/istio
+    path: infrastructure/istio
     directory:
       recurse: true
   destination:
