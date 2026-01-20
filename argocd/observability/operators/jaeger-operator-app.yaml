@@ -1,14 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kiali-operator-app
+  name: jaeger-operator
   namespace: argocd
+  labels:
+    platform: observability
 spec:
   project: default
   source:
-    repoURL: https://kiali.org/helm-charts
-    chart: kiali-operator
-    targetRevision: 1.81.0
+    repoURL: https://jaegertracing.github.io/helm-charts
+    chart: jaeger-operator
+    targetRevision: 2.50.1
   destination:
     server: https://kubernetes.default.svc
     namespace: observability
@@ -16,3 +18,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
