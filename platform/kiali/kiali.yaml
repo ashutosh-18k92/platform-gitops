@@ -16,4 +16,4 @@ spec:
   external_services:
     prometheus:
       # IMPORTANT: this must point to your Helm Prometheus service
-      url: http://prometheus-operator-server.observability.svc.cluster.local
+      url: http://prometheus-server.observability.svc.cluster.local
