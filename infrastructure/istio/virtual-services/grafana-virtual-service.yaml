@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: grafana
+  name: grafana-virtual-service
   namespace: observability
 spec:
   hosts:
