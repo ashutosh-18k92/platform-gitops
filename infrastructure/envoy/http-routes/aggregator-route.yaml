@@ -5,22 +5,22 @@ metadata:
   namespace: super-fortnight
 spec:
   parentRefs:
-  - name: super-fortnight-gateway
-    namespace: envoy-gateway-system
+    - name: default-gateway
+      namespace: envoy-gateway-system
   hostnames:
-  - "api.local"
+    - "api.local"
   rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /api
-    backendRefs:
-    - name: aggregator-service
-      port: 3000
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /health
-    backendRefs:
-    - name: aggregator-service
-      port: 3000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /api
+      backendRefs:
+        - name: aggregator-service
+          port: 3000
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /health
+      backendRefs:
+        - name: aggregator-service
+          port: 3000
