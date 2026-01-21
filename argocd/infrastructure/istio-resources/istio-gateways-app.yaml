@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-service-mesh-resources
+  name: istio-gateways
   namespace: argocd
   labels:
     team: infrastructure-team
   annotations:
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   project: default
   source:
     repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
     targetRevision: HEAD
-    path: argocd/infrastructure/istio-resources
+    path: infrastructure/istio/gateways
     directory:
       recurse: true
   destination:
