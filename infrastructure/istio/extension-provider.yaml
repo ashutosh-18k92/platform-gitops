@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ExtensionProvider
+metadata:
+  name: jaeger
+  namespace: istio-system
+spec:
+  tracing:
+    zipkin:
+      service: tracing-collector.observability
+      port: 9411
