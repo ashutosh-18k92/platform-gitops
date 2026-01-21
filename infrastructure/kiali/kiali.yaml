@@ -12,5 +12,5 @@ spec:
       - "**"
   external_services:
     prometheus:
-      # IMPORTANT: this must point to your Helm Prometheus service svc/prometheus-operator-server
+      # IMPORTANT: this must point to your Helm Prometheus service svc/prometheus-server
       url: http://prometheus-server.observability.svc.cluster.local
