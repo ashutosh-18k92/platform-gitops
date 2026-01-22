@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infrastructure-observability-instances
+  namespace: argocd
+  labels:
+    layer: infrastructure
+    domain: observability
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ashutosh-18k92/platform-gitops.git
+    targetRevision: HEAD
+    path: argocd/infrastructure/instances
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
