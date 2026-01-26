@@ -6,14 +6,11 @@ metadata:
 spec:
   meshConfig:
     enableTracing: true
-
     defaultConfig:
       tracing:
-        sampling: 100   # 1% sampling (production-safe)
-
+        sampling: 100 # 1% sampling (production-safe)
     extensionProviders:
       - name: jaeger
         zipkin:
           service: tracing-collector.observability.svc.cluster.local
           port: 9411
-
