@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: super-fortnight
+  labels:
+    name: "super-fortnight-microservices"
+    istio-injection: enabled
