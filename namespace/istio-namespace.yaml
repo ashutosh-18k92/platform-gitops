@@ -1,5 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: istio-system
-  # The namespace the gateway is deployed in must not have a istio-injection=disabled label.
